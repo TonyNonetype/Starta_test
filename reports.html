@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Отчёты</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Отчеты по товарам</h1>
+            <nav>
+                <a href="../index.html">← Каталог</a>
+                <a href="../admin/import.html">Импорт</a>
+            </nav>
+        </header>
+
+        <div class="reports">
+            <h2>Аналитика каталога</h2>
+            
+            <div class="stock-percentage">
+                <div class="stock-percentage__label" >
+                    <h3>Товаров в наличии</h3>
+                </div>
+                <div class="stock-percentage__value" id="inStockPercent">
+                    <h4>0</h4>
+                </div>
+            </div>
+
+            <div class="reports__charts">
+                <div class="chart__container">
+                    <h3 class="chart__title">Товары по категориям</h3>
+                    <canvas id="barChart"></canvas>
+                </div>
+                
+                <div class="chart__container">
+                    <h3 class="chart__title">Цены по категориям</h3>
+                    <canvas id="lineChart"></canvas>
+                </div>
+            </div>
+
+            <div class="reports__table">
+                <h3 class="table__title">Детальная статистика</h3>
+                <table id="metricsTable">
+                    <thead>
+                        <tr>
+                            <th>Категория</th>
+                            <th>Количество</th>
+                            <th>Медианная цена</th>
+                            <th>Средняя цена</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <div class="reports__actions">
+                <button id="download" class="btn btn--download">Скачать JSON</button>
+                <button id="refresh" class="btn btn--refresh">Обновить данные</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/reports.js"></script>
+</body>
+</html>

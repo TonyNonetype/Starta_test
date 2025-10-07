@@ -1,0 +1,125 @@
+@use '../main' as m;
+
+.card {
+  @include m.card-style;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+  
+  img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: m.$border-radius;
+    margin-bottom: 15px;
+  }
+  
+  h3 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: m.$dark;
+    line-height: 1.3;
+  }
+  
+  .card__price {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: m.$primary;
+    margin-bottom: 8px;
+  }
+  
+  .card__rating {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    color: m.$secondary;
+    
+    .stars {
+      color: #ffc107;
+    }
+  }
+  
+  .card__stock {
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    
+    &.in-stock {
+      color: m.$success;
+      font-weight: 500;
+    }
+    
+    &.out-of-stock {
+      color: m.$danger;
+      font-weight: 500;
+    }
+  }
+  
+  .card__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
+    margin-bottom: 15px;
+  }
+  
+  .card__compare {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 15px;
+    
+    input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+    
+    label {
+      cursor: pointer;
+      font-size: 0.9rem;
+      color: m.$secondary;
+    }
+  }
+}
+
+// Badge styles
+.badge {
+  display: inline-block;
+  padding: 4px 8px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  
+  &.badge--new {
+    background-color: m.$success;
+    color: white;
+  }
+  
+  &.badge--top {
+    background-color: m.$warning;
+    color: m.$dark;
+  }
+  
+  &.badge--sale {
+    background-color: m.$danger;
+    color: white;
+  }
+  
+  &.badge--last {
+    background-color: m.$info;
+    color: white;
+  }
+}
+
+// Card hover effects
+.card:hover {
+  .card__price {
+    color: darken(m.$primary, 10%);
+  }
+}

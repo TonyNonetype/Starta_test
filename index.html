@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог товаров</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Каталог товаров</h1>
+            <nav>
+                <a href="../admin/import.html">Импорт</a>
+                <a href="../reports.html">Отчёты</a>
+            </nav>
+        </header>
+
+        <div class="layout">
+        <aside class="layout__sidebar">
+        <div class="filters">
+            <div class="filters__group">
+                <label class="filters__label" for="search">Поиск</label>
+                <div class="filters__search">
+                    <input id="search" placeholder="Введите название товара" type="text">
+                </div>
+            </div>
+            
+            <div class="filters__group">
+                <label class="filters__label" for="category">Категория</label>
+                <select id="category">
+                    <option value="">Все категории</option>
+                </select>
+            </div>
+            
+            <div class="filters__group">
+                <label class="filters__label">Цена</label>
+                <div class="filters__price-range">
+                    <input id="minPrice" placeholder="От" type="number" min="0">
+                    <span class="price-separator">—</span>
+                    <input id="maxPrice" placeholder="До" type="number" min="0">
+                </div>
+            </div>
+            
+            <div class="filters__group">
+                <label class="filters__label" for="sort">Сортировка</label>
+                <select id="sort">
+                    <option value="price_asc">Сначала дешевле</option>
+                    <option value="price_desc">Сначала дороже</option>
+                    <option value="rating_desc">Рейтинг</option>
+                    <option value="created_at_desc">Новинки</option>
+                </select>
+            </div>
+            
+            <div class="filters__checkbox">
+                <input id="inStock" type="checkbox">
+                <label for="inStock">Только в наличии</label>
+            </div>
+        </div>
+        </aside>
+        <section class="layout__content">
+            <div id="comparison" class="comparison" style="display:none">
+                <div class="comparison__header">
+                    <h3>Сравнение товаров</h3>
+                    <span class="comparison__count" id="compareCount">0</span>
+                </div>
+                <table class="comparison__table">
+                    <thead>
+                        <tr>
+                            <th>Товар</th>
+                            <th>Цена</th>
+                            <th>Рейтинг</th>
+                            <th>Наличие</th>
+                            <th>Категория</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <div class="comparison__actions">
+                    <button id="clearCompare" class="btn btn--danger">Очистить сравнение</button>
+                </div>
+            </div>
+
+            <main>
+                <div id="grid" class="grid"></div>
+                <div id="pagination" class="pagination"></div>
+            </main>
+        </section>
+        </div>
+    </div>
+
+    <script src="js/catalog.js"></script>
+</body>
+</html>

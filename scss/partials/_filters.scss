@@ -1,0 +1,181 @@
+@use '../main' as m;
+
+.filters {
+  background: white;
+  padding: 20px;
+  border-radius: m.$border-radius;
+  box-shadow: m.$box-shadow;
+  margin-bottom: 30px;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  align-items: center;
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  
+  .filters__group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 150px;
+    
+    @media (max-width: 768px) {
+      min-width: auto;
+    }
+  }
+  
+  .filters__label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: m.$dark;
+    margin-bottom: 5px;
+  }
+  
+  input, select {
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: m.$border-radius;
+    font-size: 0.9rem;
+    transition: m.$transition;
+    background: white;
+    
+    &:focus {
+      border-color: m.$primary;
+      box-shadow: 0 0 0 2px rgba(m.$primary, 0.2);
+    }
+    
+    &::placeholder {
+      color: m.$secondary;
+    }
+  }
+  
+  input[type="number"] {
+    width: 120px;
+    
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+  }
+  
+  input[type="text"] {
+    min-width: 200px;
+    
+    @media (max-width: 768px) {
+      min-width: auto;
+      width: 100%;
+    }
+  }
+  
+  select {
+    min-width: 150px;
+    cursor: pointer;
+    
+    @media (max-width: 768px) {
+      min-width: auto;
+      width: 100%;
+    }
+  }
+  
+  .filters__checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+    
+    input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+      accent-color: m.$primary;
+    }
+    
+    label {
+      cursor: pointer;
+      font-weight: 500;
+      color: m.$dark;
+    }
+  }
+  
+  .filters__actions {
+    display: flex;
+    gap: 10px;
+    margin-left: auto;
+    
+    @media (max-width: 768px) {
+      margin-left: 0;
+      justify-content: center;
+    }
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    border-radius: m.$border-radius;
+    font-weight: 500;
+    cursor: pointer;
+    transition: m.$transition;
+    border: 1px solid transparent;
+    
+    &.btn--primary {
+      @include m.button-variant(m.$primary);
+    }
+    
+    &.btn--secondary {
+      @include m.button-variant(m.$secondary);
+    }
+    
+    &.btn--outline {
+      background: transparent;
+      color: m.$primary;
+      border-color: m.$primary;
+      
+      &:hover {
+        background-color: m.$primary;
+        color: white;
+      }
+    }
+  }
+}
+
+// Search input with icon
+.filters__search {
+  position: relative;
+  
+  &::before {
+    content: '🔍';
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: m.$secondary;
+  }
+  
+  input {
+    padding-left: 40px;
+  }
+}
+
+// Price range inputs
+.filters__price-range {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  
+  @media (max-width: 480px) {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .price-separator {
+    color: m.$secondary;
+    font-weight: 500;
+    
+    @media (max-width: 480px) {
+      display: none;
+    }
+  }
+}

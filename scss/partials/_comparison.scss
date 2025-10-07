@@ -1,0 +1,165 @@
+@use '../main' as m;
+
+.comparison {
+  background: white;
+  border-radius: m.$border-radius;
+  box-shadow: m.$box-shadow;
+  margin-bottom: 30px;
+  padding: 20px;
+  
+  .comparison__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    
+    h3 {
+      color: m.$dark;
+      margin: 0;
+    }
+    
+    .comparison__count {
+      background: m.$primary;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+  }
+  
+  .comparison__table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+    
+    th {
+      background-color: m.$light;
+      font-weight: 600;
+      color: m.$dark;
+      position: sticky;
+      top: 0;
+    }
+    
+    tr:hover {
+      background-color: rgba(m.$primary, 0.05);
+    }
+    
+    .comparison__product-name {
+      font-weight: 500;
+      color: m.$dark;
+    }
+    
+    .comparison__price {
+      font-weight: 600;
+      color: m.$primary;
+      font-size: 1.1rem;
+    }
+    
+    .comparison__rating {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      
+      .stars {
+        color: #ffc107;
+      }
+    }
+    
+    .comparison__stock {
+      &.in-stock {
+        color: m.$success;
+        font-weight: 500;
+      }
+      
+      &.out-of-stock {
+        color: m.$danger;
+        font-weight: 500;
+      }
+    }
+    
+    .comparison__category {
+      background: m.$light;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      color: m.$secondary;
+    }
+  }
+  
+  .comparison__actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    
+    .btn {
+      padding: 10px 20px;
+      border-radius: m.$border-radius;
+      font-weight: 500;
+      cursor: pointer;
+      transition: m.$transition;
+      border: 1px solid transparent;
+      
+      &.btn--danger {
+        @include m.button-variant(m.$danger);
+      }
+      
+      &.btn--outline {
+        background: transparent;
+        color: m.$primary;
+        border-color: m.$primary;
+        
+        &:hover {
+          background-color: m.$primary;
+          color: white;
+        }
+      }
+    }
+  }
+  
+  .comparison__empty {
+    text-align: center;
+    padding: 40px 20px;
+    color: m.$secondary;
+    
+    .comparison__empty-icon {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      opacity: 0.5;
+    }
+    
+    h4 {
+      margin-bottom: 10px;
+      color: m.$dark;
+    }
+    
+    p {
+      margin-bottom: 20px;
+    }
+  }
+}
+
+// Comparison limit warning
+.comparison__warning {
+  background: rgba(m.$warning, 0.1);
+  border: 1px solid m.$warning;
+  border-radius: m.$border-radius;
+  padding: 10px 15px;
+  margin-bottom: 15px;
+  color: darken(m.$warning, 20%);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  
+  &::before {
+    content: '⚠️';
+    font-size: 1.2rem;
+  }
+}

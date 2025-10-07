@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Импорт товаров</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Импорт товаров</h1>
+            <nav>
+                <a href="../index.html">← Каталог</a>
+                <a href="../reports.html">Отчёты</a>
+            </nav>
+        </header>
+
+        <div class="import-form">
+            <h2>Загрузка данных</h2>
+            <p>Поддерживаются файлы в формате CSV и JSON. Обязательные поля: id, name, category, price, stock, rating, created_at</p>
+            
+            <form id="importForm" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="file">Выберите файл</label>
+                    <input type="file" id="file" name="file" accept=".csv,.json" required>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn btn--primary">Импортировать</button>
+                    <button type="button" id="downloadTemplate" class="btn btn--outline">Скачать шаблон</button>
+                </div>
+            </form>
+            <div id="message" class="message"></div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('importForm').addEventListener('submit', async e => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const messageEl = document.getElementById('message');
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            
+            messageEl.innerHTML = '<div class="loading">Загрузка...</div>';
+            submitBtn.disabled = true;
+            
+            try {
+                const res = await fetch('/api/import.php', { method: 'POST', body: formData });
+                const data = await res.json();
+                
+                if (data.error) {
+                    messageEl.innerHTML = `<div class="error">${data.error}</div>`;
+                } else {
+                    messageEl.innerHTML = `<div class="success">Данные успешно импортированы!</div>`;
+                    e.target.reset();
+                }
+            } catch (error) {
+                messageEl.innerHTML = `<div class="error">Ошибка загрузки: ${error.message}</div>`;
+            } finally {
+                submitBtn.disabled = false;
+            }
+        });
+        
+        document.getElementById('downloadTemplate').addEventListener('click', () => {
+            const template = [
+                {
+                    id: 101,
+                    name: "Пример товара",
+                    category: "kitchen",
+                    price: 2490,
+                    stock: 5,
+                    rating: 4.8,
+                    reviews_count: 120,
+                    created_at: "2025-01-20",
+                    image: "/images/example.jpg"
+                }
+            ];
+            
+            const blob = new Blob([JSON.stringify(template, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'products_template.json';
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+    </script>
+</body>
+</html>

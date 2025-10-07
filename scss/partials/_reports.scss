@@ -1,0 +1,257 @@
+@use '../main' as m;
+
+.reports {
+  background: white;
+  border-radius: m.$border-radius;
+  box-shadow: m.$box-shadow;
+  padding: 30px;
+  margin-bottom: 30px;
+  
+  h2 {
+    color: m.$dark;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .reports__summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+    
+    .summary__card {
+      background: m.$light;
+      padding: 20px;
+      border-radius: m.$border-radius;
+      text-align: center;
+      
+      .summary__value {
+        font-size: 2rem;
+        font-weight: 600;
+        color: m.$primary;
+        margin-bottom: 5px;
+      }
+      
+      .summary__label {
+        color: m.$secondary;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+    }
+  }
+  
+  .reports__charts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
+    
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+    
+    .chart__container {
+      background: m.$light;
+      padding: 20px;
+      border-radius: m.$border-radius;
+      
+      .chart__title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: m.$dark;
+        margin-bottom: 15px;
+        text-align: center;
+      }
+      
+      canvas {
+        width: 100%;
+        height: 300px;
+        border-radius: m.$border-radius;
+        background: white;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+    }
+  }
+  
+  .reports__table {
+    margin-bottom: 30px;
+    
+    .table__title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: m.$dark;
+      margin-bottom: 15px;
+    }
+  }
+  
+  .reports__actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    
+    .btn {
+      padding: 12px 24px;
+      border-radius: m.$border-radius;
+      font-weight: 500;
+      cursor: pointer;
+      transition: m.$transition;
+      border: 1px solid transparent;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      
+      &.btn--primary {
+        @include m.button-variant(m.$primary);
+      }
+      
+      &.btn--success {
+        @include m.button-variant(m.$success);
+      }
+      
+      &.btn--outline {
+        background: transparent;
+        color: m.$primary;
+        border-color: m.$primary;
+        
+        &:hover {
+          background-color: m.$primary;
+          color: white;
+        }
+      }
+      
+      &::before {
+        font-size: 1.1rem;
+      }
+      
+      &.btn--download::before {
+        content: '📥';
+      }
+      
+      &.btn--refresh::before {
+        content: '🔄';
+      }
+    }
+  }
+}
+
+// Metrics table
+#metricsTable {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: m.$border-radius;
+  overflow: hidden;
+  box-shadow: m.$box-shadow;
+  
+  th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+  }
+  
+  th {
+    background-color: m.$primary;
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+  }
+  
+  tr:hover {
+    background-color: rgba(m.$primary, 0.05);
+  }
+  
+  .table__category {
+    font-weight: 500;
+    color: m.$dark;
+  }
+  
+  .table__count {
+    font-weight: 600;
+    color: m.$primary;
+  }
+  
+  .table__price {
+    font-weight: 500;
+    color: m.$success;
+  }
+  
+  .table__median {
+    color: m.$info;
+  }
+  
+  .table__average {
+    color: m.$warning;
+  }
+}
+
+// Stock percentage display
+.stock-percentage {
+  background: linear-gradient(135deg, m.$success, m.$info);
+  color: white;
+  padding: 20px;
+  border-radius: m.$border-radius;
+  text-align: center;
+  margin-bottom: 30px;
+  
+  .stock-percentage__value {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  
+  .stock-percentage__label {
+    font-size: 1.1rem;
+    opacity: 0.9;
+  }
+}
+
+// Loading states
+.reports__loading {
+  text-align: center;
+  padding: 40px;
+  color: m.$secondary;
+  
+  .loading__spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid m.$light;
+    border-top: 4px solid m.$primary;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+  }
+  
+  .loading__text {
+    font-size: 1.1rem;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+// Error states
+.reports__error {
+  background: rgba(m.$danger, 0.1);
+  border: 1px solid m.$danger;
+  border-radius: m.$border-radius;
+  padding: 20px;
+  text-align: center;
+  color: m.$danger;
+  
+  .error__icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+  }
+  
+  .error__message {
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+}
